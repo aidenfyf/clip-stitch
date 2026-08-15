@@ -2,7 +2,7 @@
 
 Turn a pile of screenshots and screen recordings into a short trailer that looks like a launch video - entirely in your browser. Nothing uploads anywhere. Works on a phone.
 
-**▶︎ Live: [clip-stitch.vercel.app](https://clip-stitch.vercel.app)**
+**▶︎ Live: [clip-stitch-phi.vercel.app](https://clip-stitch-phi.vercel.app)**
 
 ![Clip Stitch - a privacy-first trailer maker that runs entirely in your browser](assets/clip-stitch.png)
 
