@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17130F">
+<title>Clip Stitch - screenshots in, a trailer out</title>
+<meta name="description" content="Turn screenshots and screen recordings into a short trailer, entirely in your browser. No upload, no account, no watermark.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preload" href="fonts/BigShouldersDisplay-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/Inter-400-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/DMMono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Local render &middot; nothing uploads</p>
+    <h1 class="wordmark">Clip<em>Stitch</em></h1>
+    <p class="sub">Drop in screenshots and screen recordings. Get back a short trailer you can drop straight into a group chat.</p>
+    <p class="privacy">🔒 Your footage <strong>never leaves this page</strong>. No upload, no account, no watermark.</p>
+  </header>
+
+  <section class="block">
+    <p class="legend"><span>Footage</span><b id="count">0 shots</b></p>
+    <input type="file" id="picker" accept="image/*,video/*" multiple hidden>
+    <button class="intake" id="intake" type="button">
+      <strong>Add screenshots or recordings</strong>
+      <span>They stay on your device</span>
+    </button>
+    <div class="strip" style="margin-top:12px">
+      <div class="frames" id="frames"><div class="empty">Strip is empty</div></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="legend"><span>Titles</span></p>
+    <label class="field">
+      <span class="cap">Project name</span>
+      <input type="text" id="name" placeholder="State Fair" maxlength="40">
+    </label>
+    <label class="field">
+      <span class="cap">One line about it</span>
+      <input type="text" id="tagline" placeholder="Every ride, every food stand, one map." maxlength="70">
+    </label>
+    <label class="field" style="margin-bottom:0">
+      <span class="cap">Closing line</span>
+      <input type="text" id="endline" value="Built with Claude Code" maxlength="40">
+    </label>
+  </section>
+
+  <section class="block">
+    <p class="legend"><span>Shape</span></p>
+    <div class="choices" id="aspects">
+      <button class="choice" type="button" data-v="9:16" aria-pressed="true">Vertical</button>
+      <button class="choice" type="button" data-v="1:1" aria-pressed="false">Square</button>
+      <button class="choice" type="button" data-v="16:9" aria-pressed="false">Wide</button>
+    </div>
+  </section>
+
+  <section class="block">
+    <p class="legend"><span>Look</span></p>
+    <div class="choices" id="looks"></div>
+  </section>
+
+  <section class="block">
+    <p class="legend"><span>Sound</span></p>
+    <div class="toggle">
+      <p>Music bed<small id="musicNote">Generated on the fly, no download</small></p>
+      <button class="switch" id="music" type="button" aria-pressed="true"><i></i></button>
+    </div>
+    <input type="file" id="audioPicker" accept="audio/*" hidden>
+    <button class="choice" id="ownAudio" type="button" style="width:100%;margin-top:8px">Use my own track</button>
+  </section>
+
+  <section class="stage" id="stage">
+    <p class="legend"><span>Rendering</span><b id="clock">0:00</b></p>
+    <canvas id="canvas"></canvas>
+    <div class="bar"><i id="barFill"></i></div>
+  </section>
+
+  <section class="result" id="result">
+    <p class="legend"><span>Done</span><b id="size"></b></p>
+    <video id="preview" controls playsinline></video>
+    <div class="actions">
+      <a id="save" download="trailer.mp4">Save</a>
+      <button id="share" type="button">Share</button>
+      <button id="again" type="button">Redo</button>
+    </div>
+  </section>
+
+  <button class="go" id="go" type="button" disabled>Make trailer</button>
+  <p class="readout" id="readout">Add footage to start</p>
+
+  <p class="note" style="margin-top:28px">Rendering runs in real time, so a 25 second trailer takes about 25 seconds. Keep the tab open and the screen awake.</p>
+
+  <footer class="foot">
+    <p class="disclaimer">🔒 Privacy first - your screenshots and recordings are never uploaded, saved, or stored on any server. The trailer is drawn frame by frame on your own device and handed straight back to you. Nothing leaves your device, and nothing is kept once you close the tab.</p>
+    <p>100% client-side. <a href="https://github.com/aidenfyf/clip-stitch" rel="noopener">Built to be read</a> - open the files and see for yourself.</p>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
